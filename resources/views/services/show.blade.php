@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
-@section('title', $service->meta_title ?? $service->title)
+@section('title', $service->seo_title ?: $service->title)
 
+@section('description', $service->seo_description ?: $service->short_description)
+
+@section('og_title', $service->seo_title ?: $service->title)
+
+@section('og_description', $service->seo_description ?: $service->short_description)
 @section('content')
 
 <section class="service-show">

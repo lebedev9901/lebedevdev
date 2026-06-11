@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+
+    <meta name="yandex-verification" content="d8361e965331a5e8" />
+    <title>@yield('title', 'LebedevDev')</title>
+
+    <meta name="description" content="@yield('description', 'Разработка сайтов, мобильных приложений, CRM-систем и веб-сервисов.')">
+    <meta name="keywords" content="@yield('keywords', 'разработка сайтов, laravel, flutter, crm, мобильные приложения')">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="LebedevDev">
+    <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'LebedevDev'))">
+    <meta property="og:description" content="@yield('og_description', View::yieldContent('description'))">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('og-image.jpg') }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title'))">
+    <meta name="twitter:description" content="@yield('og_description', View::yieldContent('description'))">
+    <meta name="twitter:image" content="{{ asset('og-image.jpg') }}">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LebedevDev</title>
+
     <link rel="stylesheet" href="{{asset('assets/css/normalize.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/header.css')}}">
