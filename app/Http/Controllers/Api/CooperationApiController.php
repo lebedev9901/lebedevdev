@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller as ControllersController;
+use App\Http\Controllers\Controller;
 use App\Models\CooperationRequest;
-use Controller\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class CooperationController extends ControllersController
+class CooperationApiController extends Controller
 {
     public function store(Request $request)
     {
@@ -19,6 +18,7 @@ class CooperationController extends ControllersController
             'site_type' => ['nullable', 'string', 'max:255'],
             'design' => ['nullable', 'string', 'max:255'],
             'features' => ['nullable', 'array'],
+            'features.*' => ['string', 'max:255'],
             'budget' => ['nullable', 'string', 'max:255'],
             'deadline' => ['nullable', 'string', 'max:255'],
             'examples' => ['nullable', 'string', 'max:255'],
@@ -29,19 +29,21 @@ class CooperationController extends ControllersController
         $data['tz_file'] = null;
 
         if ($request->hasFile('tz_file')) {
-            $data['tz_file'] = $request->file('tz_file')->store('cooperation/tz', 'public');
+            $data['tz_file'] = $request->file('tz_file')
+                ->store('cooperation/tz', 'public');
         }
 
         $cooperationRequest = CooperationRequest::create($data);
 
-        
         $message = $this->makeVkMessage($cooperationRequest);
+
         if (!empty($data['tz_file'])) {
             $tzUrl = url('storage/' . $data['tz_file']);
 
             $message .= "\n\nТЗ прикреплено:";
             $message .= "\n" . $tzUrl;
         }
+
         $response = Http::asForm()->post('https://api.vk.com/method/messages.send', [
             'access_token' => config('services.vkontakte.group_token'),
             'v' => config('services.vkontakte.api_version'),
@@ -56,8 +58,12 @@ class CooperationController extends ControllersController
                 'response' => $response->json(),
             ]);
         }
-        
-        return back()->with('success', 'Заявка отправлена! Я свяжусь с вами в ближайшее время.');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Заявка успешно отправлена',
+            'data' => $cooperationRequest,
+        ], 201);
     }
 
     private function makeVkMessage(CooperationRequest $request): string

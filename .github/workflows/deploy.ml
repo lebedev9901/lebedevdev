@@ -1,0 +1,37 @@
+name: Deploy Laravel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Timeweb
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: root
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /var/www/lebedevdev
+
+            git pull origin main
+
+            composer install --no-dev --optimize-autoloader
+
+            npm install
+            npm run build
+
+            php artisan migrate --force
+
+            php artisan optimize:clear
+            php artisan optimize
+
+            php artisan storage:link || true
+
+            chown -R www-data:www-data storage bootstrap/cache
+            chmod -R 775 storage bootstrap/cache

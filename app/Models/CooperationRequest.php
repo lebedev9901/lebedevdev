@@ -17,6 +17,7 @@ class CooperationRequest extends Model
         'examples',
         'description',
         'status',
+        'tz_file'
     ];
 
     protected $casts = [

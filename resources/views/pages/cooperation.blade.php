@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <form action="{{route('cooperation.store')}}" method="POST" class="cooperation__form" id="brief">
+        <form action="{{route('cooperation.store')}}" method="POST" class="cooperation__form" id="brief" enctype="multipart/form-data">
             @csrf
             @if(session('success'))
                 <div class="cooperation__success">
@@ -179,6 +179,15 @@
             <div class="cooperation__field">
                 <label class="cooperation__field-label">Есть ли примеры сайтов?</label>
                 <input type="text" name="examples" class="cooperation__input" placeholder="Ссылки на сайты, которые нравятся">
+            </div>
+            <div class="cooperation__field">
+                <label for="tz_file">Техническое задание (если есть)</label>
+                <input 
+                    type="file" 
+                    name="tz_file" 
+                    id="tz_file"
+                    accept=".pdf,.doc,.docx,.txt,.zip,.rar"
+                >
             </div>
 
             <button type="submit" class="cooperation__button">

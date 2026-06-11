@@ -128,6 +128,11 @@
     padding: 0 18px;
 }
 
+.cooperation__input option{
+    background:var(--surface);
+    color:var(--text);   
+}
+
 .cooperation__textarea {
     min-height: 150px;
     padding: 18px;
