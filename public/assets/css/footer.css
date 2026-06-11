@@ -1,0 +1,128 @@
+.footer{
+    margin-top: 120px;
+    padding: 60px 80px 30px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.footer__content{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer__info{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer__logo{
+    font-size: 32px;
+    color: var(--text);
+}
+
+.footer__description{
+    max-width: 500px;
+    color: var(--muted);
+    font-size: 18px;
+}
+
+.footer__links,
+.footer__social{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer__link,
+.footer__social-link{
+    color: var(--muted);
+    width: fit-content;
+}
+
+.footer__link:hover,
+.footer__social-link:hover{
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+.footer__bottom{
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+@media (max-width: 1024px){
+
+    .footer{
+        padding: 50px 40px 25px;
+        margin-top: 80px;
+    }
+
+    .footer__content{
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .footer__info{
+        grid-column: 1 / -1;
+    }
+
+    .footer__logo{
+        font-size: 28px;
+    }
+
+    .footer__description{
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px){
+
+    .footer{
+        padding: 40px 20px 20px;
+        margin-top: 60px;
+    }
+
+    .footer__content{
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-bottom: 28px;
+    }
+
+    .footer__info{
+        grid-column: auto;
+    }
+
+    .footer__logo{
+        font-size: 24px;
+    }
+
+    .footer__description{
+        font-size: 16px;
+    }
+
+    .footer__links,
+    .footer__social{
+        gap: 12px;
+    }
+
+    .footer__link,
+    .footer__social-link{
+        width: 100%;
+        padding: 4px 0;
+    }
+
+    .footer__bottom{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,142 @@
+.hero {
+    --moveX: 0px;
+    --moveY: 0px;
+
+    width: 100%;
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    padding: 20px 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+
+    background-image: url("../image/hero_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center right;
+
+    z-index: 1;
+    pointer-events: none;
+
+    filter:
+        drop-shadow(0 0 20px rgba(56, 189, 248, .35))
+        drop-shadow(0 0 40px rgba(56, 189, 248, .15));
+
+    transform: translate(var(--moveX), var(--moveY));
+    transition: transform .08s linear;
+
+    animation: heroGlow 4s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+    0%, 100% {
+        opacity: .85;
+        filter:
+            drop-shadow(0 0 20px rgba(56, 189, 248, .30))
+            drop-shadow(0 0 40px rgba(56, 189, 248, .12));
+    }
+
+    50% {
+        opacity: 1;
+        filter:            drop-shadow(0 0 35px rgba(56, 189, 248, .45))            drop-shadow(0 0 70px rgba(56, 189, 248, .22));
+}
+}
+
+.hero__contain {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: min(100%, 660px);
+    gap: 14px;
+    z-index: 2;
+}
+
+.hero__title,
+.hero__subtitle{
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.1;
+    hyphens: auto;
+}
+.hero__subtitle{
+    color: var(--muted);
+}
+
+
+.hero__description {
+    font-size: clamp(18px, 2vw, 24px);
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 620px;
+}
+
+.hero__actions {
+    display: flex;
+    gap: 24px;
+}
+
+.hero__link {
+    min-width: 220px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        padding: 40px 40px;
+    }
+
+    .hero::after {
+        width: 90%;
+        opacity: .55;
+    }
+}
+@media (max-width: 768px) {
+    .hero {
+        min-height: 100vh;
+        padding: 110px 20px 40px;
+        align-items: flex-start;
+    }
+
+    .hero::after {
+        top: auto;
+        right: -40px;
+        bottom: 30px;
+        width: 120%;
+        height: 55%;
+        opacity: .35;
+        background-size: contain;
+        background-position: center bottom;
+    }
+
+    .hero__contain {
+        width: 100%;
+        gap: 18px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .subtitle::before {
+        width: 40px;
+    }
+
+    .hero__actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .hero__link {
+        width: 100%;
+        min-width: 0;
+    }
+}

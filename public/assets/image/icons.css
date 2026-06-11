@@ -1,0 +1,7 @@
+.icon-card {
+    width: 48px;
+    height: 48px;
+    filter:
+        drop-shadow(0 0 10px rgba(56, 189, 248, .35))
+        drop-shadow(0 0 24px rgba(56, 189, 248, .18));
+}
