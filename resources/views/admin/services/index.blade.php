@@ -11,6 +11,7 @@
         <a href="{{ route('admin.services.create') }}" class="admin-services__button">
             Добавить услугу
         </a>
+        <a href="{{ route('admin.logout') }}">Выйти</a>
     </div>
 
     @if(session('success'))

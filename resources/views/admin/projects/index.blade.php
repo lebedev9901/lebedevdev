@@ -11,6 +11,7 @@
         <a href="{{ route('admin.projects.create') }}" class="admin-projects__button">
             Добавить проект
         </a>
+        <a href="{{ route('admin.logout') }}">Выйти</a>
     </div>
 
     @if(session('success'))
