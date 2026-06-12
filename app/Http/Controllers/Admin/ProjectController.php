@@ -28,20 +28,15 @@ class ProjectController extends Controller
     {
         $data = $this->validateProject($request);
 
-        $data['slug'] = Str::slug($data['title']);
+        $data['slug'] = $this->uniqueSlug($data['title']);
         $data['technologies'] = $this->textareaToArray($data['technologies'] ?? null);
 
-
-       if ($request->hasFile('image')) {
-
+        if ($request->hasFile('image')) {
             $data['image'] = $request
                 ->file('image')
                 ->store('projects', 'public');
-
         }
 
-        Project::create($data);
-        
         $project = Project::create($data);
 
         $this->storeProjectFiles($request, $project);
@@ -60,21 +55,23 @@ class ProjectController extends Controller
     {
         $data = $this->validateProject($request);
 
-        $data['slug'] = Str::slug($data['title']);
+        $data['slug'] = $this->uniqueSlug($data['title'], $project->id);
         $data['technologies'] = $this->textareaToArray($data['technologies'] ?? null);
 
         if ($request->hasFile('image')) {
-
             if ($project->image) {
                 Storage::disk('public')->delete($project->image);
             }
 
-            $data['image'] = $request->file('image')->store('projects', 'public');
+            $data['image'] = $request
+                ->file('image')
+                ->store('projects', 'public');
         } else {
             unset($data['image']);
         }
 
         $project->update($data);
+
         $this->storeProjectFiles($request, $project);
 
         return redirect()
@@ -84,14 +81,17 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        
         if ($project->image) {
-
-            Storage::disk('public')
-                ->delete($project->image);
-
+            Storage::disk('public')->delete($project->image);
         }
+
+        foreach ($project->files as $file) {
+            Storage::disk('public')->delete($file->path);
+        }
+
+        $project->files()->delete();
         $project->delete();
+
         return redirect()
             ->route('admin.projects.index')
             ->with('success', 'Проект удалён');
@@ -116,12 +116,29 @@ class ProjectController extends Controller
         ]);
     }
 
+    private function uniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $baseSlug = Str::slug($title);
+        $slug = $baseSlug;
+        $count = 1;
+
+        while (
+            Project::where('slug', $slug)
+                ->when($ignoreId, fn ($query) => $query->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
+    }
+
     private function textareaToArray(?string $value): array
     {
         if (!$value) {
             return [];
         }
-        
 
         return collect(explode("\n", $value))
             ->map(fn ($item) => trim($item))

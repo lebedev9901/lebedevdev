@@ -8,7 +8,7 @@
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     <meta name="yandex-verification" content="d8361e965331a5e8" />
-    <title>@yield('title', 'LebedevDev')</title>
+    <title>@yield('title', 'Разработка сайтов под ключ | LebedevDev')</title>
 
     <meta name="description" content="@yield('description', 'Разработка сайтов, мобильных приложений, CRM-систем и веб-сервисов.')">
     <meta name="keywords" content="@yield('keywords', 'разработка сайтов, laravel, flutter, crm, мобильные приложения')">

@@ -19,7 +19,7 @@
     <div class=" about__contain flex">
         <div class="about__text flex">
             <h2 class="main__title">Разработчик с опытом и страстью к коду</h2>
-            <p class="main__description">Я занимаюсь разработкой web-приложений и сайтов более 3 лет. люлю чистый код, продуманный дизайн и высокую производительность</p>
+            <p class="main__description">Я занимаюсь разработкой web-приложений и сайтов более 3 лет. люблю чистый код, продуманный дизайн и высокую производительность</p>
             <a href="{{route('about')}}" class="btn__primary about__action">Подробнее обо мне</a>    
         </div>
         <div class="about__preview flex">
