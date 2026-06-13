@@ -260,6 +260,118 @@
     box-shadow: 0 16px 40px rgba(56, 189, 248, .25);
 }
 
+.services-preview__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.services-preview__card {
+    position: relative;
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    padding: 34px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+    color: var(--text);
+    text-decoration: none;
+    transition: .35s ease;
+}
+
+.services-preview__card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: radial-gradient(circle at 20% 0%, rgba(56,189,248,.22), transparent 38%);
+    opacity: 0;
+    transition: .35s ease;
+}
+
+.services-preview__card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(56,189,248,.7);
+    box-shadow: 0 24px 70px rgba(56,189,248,.16);
+}
+
+.services-preview__card:hover::before {
+    opacity: 1;
+}
+
+.services-preview__icon {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background: rgba(56,189,248,.12);
+    box-shadow: inset 0 0 0 1px rgba(56,189,248,.25);
+    font-size: 34px;
+}
+
+.services-preview__content {
+    position: relative;
+    z-index: 2;
+}
+
+.services-preview__title {
+    margin: 0 0 18px;
+    font-size: 26px;
+    line-height: 1.25;
+}
+
+.services-preview__descr {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 18px;
+    line-height: 1.55;
+}
+
+.services-preview__link {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    width: fit-content;
+    margin-top: auto;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.services-preview__card:hover .services-preview__link {
+    transform: translateX(6px);
+}
+
+@media(max-width: 1200px) {
+    .services-preview__list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+    .services-preview__list {
+        grid-template-columns: 1fr;
+    }
+
+    .services-preview__card {
+        min-height: 300px;
+        padding: 28px;
+    }
+
+    .services-preview__title {
+        font-size: 24px;
+    }
+
+    .services-preview__descr {
+        font-size: 17px;
+    }
+}
+
 
 /* =========================
    ADAPTIVE

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<section class="section flex">
+<section class="section projects-page">
 
     <p class="subtitle">
         Проекты
@@ -19,59 +19,62 @@
         интернет-магазинов и интеграций.
     </p>
 
-
-    <div class="project__list">
+    <div class="projects-page__grid">
 
         @forelse($projects as $project)
 
-            <article class="project__list-item flex">
+            <article class="projects-preview__item">
 
-                @if($project->image)
-                    <img
-                        src="{{ asset('storage/'.$project->image) }}"
-                        alt="{{ $project->title }}"
-                        class="project__item-img"
-                    >
-                @endif
+                <a href="{{ route('projects.show', $project) }}" class="projects-preview__card">
 
-                <a
-                    href="{{ route('projects.show', $project) }}"
-                    
-                >
-                <h2 class="project__list-title">
-                    {{ $project->title }}
-                </h2>
-</a>
+                    <div class="projects-preview__image">
+                        @if($project->image)
+                            <img
+                                src="{{ asset('storage/' . $project->image) }}"
+                                alt="{{ $project->title }}"
+                            >
+                        @else
+                            <div class="projects-preview__placeholder">
+                                {{ mb_substr($project->title, 0, 1) }}
+                            </div>
+                        @endif
 
-                <p class="project__list-descr">
-                    {{ $project->short_description }}
-                </p>
+                        <span class="projects-preview__status projects-preview__status--{{ $project->status }}">
+                            {{ $project->status_label }}
+                        </span>
+                    </div>
 
-                @if(!empty($project->technologies))
+                    <div class="projects-preview__body">
 
-                    <div class="project__steks">
+                        <h2 class="projects-preview__title">
+                            {{ $project->title }}
+                        </h2>
 
-                        @foreach($project->technologies as $technology)
+                        <p class="projects-preview__descr">
+                            {{ $project->short_description }}
+                        </p>
+                        @if(!empty($project->technologies))
 
-                            <span class="project__stek">
-                                {{ $technology }}
-                            </span>
+                            <div class="projects-preview__technologies">
 
-                        @endforeach
+                                @foreach($project->technologies as $technology)
+
+                                    <span class="projects-preview__technology">
+                                        {{ $technology }}
+                                    </span>
+
+                                @endforeach
+
+                            </div>
+
+                        @endif
+
+                        <span class="projects-preview__link">
+                            Подробнее →
+                        </span>
 
                     </div>
 
-                @endif
-
-                <span class="project__status project__status--{{ $project->status }}">
-                    {{ $project->status_label }}
-                </span>
-
-                <a
-                    href="{{ route('projects.show', $project) }}"
-                    class="project__action btn__ghost"
-                >
-                    Подробнее
                 </a>
 
             </article>
@@ -85,6 +88,7 @@
         @endforelse
 
     </div>
+
 </section>
 
 @endsection

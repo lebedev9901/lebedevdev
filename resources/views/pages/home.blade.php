@@ -53,7 +53,7 @@
     </div>
 </section>
 <div class="line"></div>
-<section class="section flex" id="slugs">
+<section class="section flex services-preview" id="slugs">
 
     <p class="subtitle">
         Услуги
@@ -63,25 +63,32 @@
         Что я делаю
     </h2>
 
-    <ul class="slug__list flex list-reset">
+    <ul class="services-preview__list list-reset">
 
         @foreach($services as $service)
 
-            <li class="slug__list-item flex">
+            <li class="services-preview__item">
 
-                <h4 class="slug__list-title">
-                    {{ $service->title }}
-                </h4>
+                <a href="{{ route('services.show', $service) }}" class="services-preview__card">
 
-                <p class="slug__list-descr">
-                    {{ $service->short_description }}
-                </p>
+                    <div class="services-preview__icon">
+                        {{ config('services-icons')[$service->icon] ?? '💻' }}
+                    </div>
 
-                <a
-                    href="{{ route('services.show', $service) }}"
-                    class="btn__ghost"
-                >
-                    Подробнее
+                    <div class="services-preview__content">
+                        <h4 class="services-preview__title">
+                            {{ $service->title }}
+                        </h4>
+
+                        <p class="services-preview__descr">
+                            {{ $service->short_description }}
+                        </p>
+                    </div>
+
+                    <span class="services-preview__link">
+                        Подробнее →
+                    </span>
+
                 </a>
 
             </li>
@@ -89,9 +96,12 @@
         @endforeach
 
     </ul>
+    <a href="{{ route('services') }}" class="service_action btn__primary">
+        Все услуги
+    </a>
 
 </section>
-<section class="section flex" id="project">
+<section class="section flex projects-preview" id="project">
 
     <p class="subtitle">
         Мои проекты
@@ -101,47 +111,48 @@
         Последние проекты
     </h2>
 
-    <ul class="project__list flex list-reset">
+    <ul class="projects-preview__list list-reset">
 
         @foreach($projects as $project)
 
-            <li class="project__list-item flex">
+            <li class="projects-preview__item">
 
-                @if($project->image)
-                    <img
-                        src="{{ asset('storage/' . $project->image) }}"
-                        alt="{{ $project->title }}"
-                        class="project__item-img"
-                    >
-                @endif
+                <a href="{{ route('projects.show', $project) }}" class="projects-preview__card">
 
-                <h4 class="project__list-title">
-                    <a href="{{ route('projects.show', $project) }}">
-                        {{ $project->title }}
-                    </a>
-                </h4>
+                    <div class="projects-preview__image">
+                        @if($project->image)
+                            <img
+                                src="{{ asset('storage/' . $project->image) }}"
+                                alt="{{ $project->title }}"
+                            >
+                        @else
+                            <div class="projects-preview__placeholder">
+                                {{ mb_substr($project->title, 0, 1) }}
+                            </div>
+                        @endif
 
-                @if(!empty($project->technologies))
-                    <div class="project__steks">
+                        <span class="projects-preview__status projects-preview__status--{{ $project->status }}">
+                            {{ $project->status_label }}
+                        </span>
+                    </div>
 
-                        @foreach($project->technologies as $technology)
+                    <div class="projects-preview__body">
 
-                            <span class="project__stek">
-                                {{ $technology }}
-                            </span>
+                        <h4 class="projects-preview__title">
+                            {{ $project->title }}
+                        </h4>
 
-                        @endforeach
+                        <p class="projects-preview__descr">
+                            {{ $project->short_description }}
+                        </p>
+
+                        <span class="projects-preview__link">
+                            Подробнее →
+                        </span>
 
                     </div>
-                @endif
 
-                <span class="project__status project__status--{{ $project->status }}">
-                    {{ $project->status_label }}
-                </span>
-
-                <p class="project__list-descr">
-                    {{ $project->short_description }}
-                </p>
+                </a>
 
             </li>
 
