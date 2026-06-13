@@ -102,7 +102,10 @@
             <label class="admin-project-form__label">Сортировка</label>
             <input type="number" name="sort_order" class="admin-project-form__input" value="0">
         </div>
-
+        <label>
+            <input type="checkbox" name="publish_vk" value="1">
+            Опубликовать проект в VK
+        </label>
         <button type="submit" class="admin-project-form__button">
             Сохранить
         </button>

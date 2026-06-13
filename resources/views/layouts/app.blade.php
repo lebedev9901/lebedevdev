@@ -18,12 +18,12 @@
     <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'LebedevDev'))">
     <meta property="og:description" content="@yield('og_description', View::yieldContent('description'))">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('og-image.jpg') }}">
+    <meta property="og:image" content="@yield('og_image', asset('og-image.jpg'))">">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title'))">
     <meta name="twitter:description" content="@yield('og_description', View::yieldContent('description'))">
-    <meta name="twitter:image" content="{{ asset('og-image.jpg') }}">
+    <meta name="twitter:image" content="@yield('og_image', asset('og-image.jpg'))">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

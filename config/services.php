@@ -36,6 +36,7 @@ return [
     ],
 
     'vkontakte' => [
+    'group_id' => env('VK_GROUP_ID'),
     'group_token' => env('VK_GROUP_TOKEN'),
     'admin_id' => env('VK_ADMIN_ID'),
     'api_version' => env('VK_API_VERSION', '5.131'),

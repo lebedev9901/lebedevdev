@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Services\VkPublishService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -39,6 +40,9 @@ class ProjectController extends Controller
 
         $project = Project::create($data);
 
+        if ($request->boolean('publish_vk')) {
+            app(VkPublishService::class)->publishProject($project);
+        }
         $this->storeProjectFiles($request, $project);
 
         return redirect()

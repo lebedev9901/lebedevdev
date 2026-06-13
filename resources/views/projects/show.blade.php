@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title', $project->title)
 @section('title', $project->seo_title ?: $project->title)
-
 @section('description', $project->seo_description ?: $project->short_description)
 
-@section('og_title', $project->seo_title ?: $project->title)
+@section('og_title', $project->title)
+@section('og_description', $project->short_description)
 
-@section('og_description', $project->seo_description ?: $project->short_description)
+@if($project->image)
+    @section('og_image', asset('storage/' . $project->image))
+@endif
 @section('content')
 
 <section class="section project-page__hero">
