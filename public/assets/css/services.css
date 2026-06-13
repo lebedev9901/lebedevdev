@@ -269,7 +269,7 @@
 .services-preview__card {
     position: relative;
     display: flex;
-    min-height: 260px;
+    height: 260px;
     flex-direction: column;
     padding: 34px;
     overflow: hidden;

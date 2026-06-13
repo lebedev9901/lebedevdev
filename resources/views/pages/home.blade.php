@@ -96,9 +96,6 @@
         @endforeach
 
     </ul>
-    <a href="{{ route('services') }}" class="service_action btn__primary">
-        Все услуги
-    </a>
 
 </section>
 <section class="section flex projects-preview" id="project">
