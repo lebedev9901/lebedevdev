@@ -15,7 +15,8 @@ class VkPublishService
     $message = "🚀 Новый проект в портфолио\n\n";
     $message .= $project->title . "\n\n";
     $message .= $project->short_description . "\n\n";
-    $message .= $project->technologies . "\n\n";
+    $message .= "\n\nТехнологии:\n";
+    $message .= implode(', ', $project->technologies ?? []);
     $message .= "Подробнее:\n";
     $message .= route('projects.show', $project);
 
