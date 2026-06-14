@@ -41,7 +41,14 @@ class ProjectController extends Controller
         $project = Project::create($data);
 
         if ($request->boolean('publish_vk')) {
-            app(VkPublishService::class)->publishProject($project);
+            try {
+                app(VkPublishService::class)->publishProject($project);
+            } catch (\Throwable $e) {
+                logger()->error('VK publish failed', [
+                    'project_id' => $project->id,
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
         $this->storeProjectFiles($request, $project);
 

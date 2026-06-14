@@ -12,5 +12,6 @@
         <a href="{{route('services')}}">Услуги</a>
         <a href="{{route('projects')}}">Проекты</a>
         <a href="{{route('cooperation')}}">Сотрудничество</a>
+        <a href="https://www.rustore.ru/catalog/app/ru.lebedevdev.mobile">Мобильное приложение</a>
     </nav>
 </header>
